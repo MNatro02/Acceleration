@@ -1,0 +1,40 @@
+using System;
+
+class Program
+{
+    #region Coin Change Function
+
+    static int MinSplit(int amount)
+    {
+        int[] coinValues = { 50, 20, 10, 5, 1 };
+        int numCoins = 0;
+
+        foreach (int coin in coinValues)
+        {
+            while (amount >= coin)
+            {
+                amount -= coin;
+                numCoins++;
+            }
+        }
+
+        return numCoins;
+    }
+
+    #endregion
+
+    #region Main Method
+
+    static void Main()
+    {
+        Console.WriteLine("Enter the amount (in white):");
+        int amount = int.Parse(Console.ReadLine());
+
+        int minCoins = MinSplit(amount);
+
+        Console.WriteLine($"Minimum number of coins needed: {minCoins}");
+    }
+
+    #endregion
+}
+
