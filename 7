@@ -1,0 +1,25 @@
+using System;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        using (var context = new SchoolDbContext())
+        {
+            string studentNameToSearch = "გიორგი";
+
+            var teachers = context.Teachers
+                .Where(teacher =>
+                    teacher.TeacherStudents
+                        .Any(ts => ts.Student.FirstName == studentNameToSearch))
+                .ToArray();
+
+            Console.WriteLine("Teachers who teach a student named გიორგი:");
+            foreach (var teacher in teachers)
+            {
+                Console.WriteLine($"{teacher.FirstName} {teacher.LastName}");
+            }
+        }
+    }
+}
